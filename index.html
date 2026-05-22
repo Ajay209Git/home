@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saarthi Technologies — Chrome Extensions</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --success: #10b981;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      font-family: var(--font);
+      background: var(--gray-100);
+      color: var(--gray-800);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white;
+      padding: 50px 20px 40px;
+      text-align: center;
+    }
+    .header h1 { font-size: 32px; font-weight: 700; }
+    .header p { opacity: 0.85; margin-top: 6px; font-size: 15px; }
+    .header .badge-row { margin-top: 14px; }
+    .header .badge-row span {
+      display: inline-block; background: rgba(255,255,255,0.15);
+      padding: 4px 14px; border-radius: 20px; font-size: 13px; margin: 0 4px;
+    }
+    .container { max-width: 820px; margin: 0 auto; padding: 30px 20px 60px; }
+    .card {
+      background: white; border-radius: var(--radius-lg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 32px;
+      margin-bottom: 28px; border: 1px solid var(--gray-200);
+    }
+    .product-layout { display: flex; gap: 28px; align-items: flex-start; }
+    .product-icon {
+      flex-shrink: 0; width: 100px; height: 100px;
+      background: var(--gray-100); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border: 1px solid var(--gray-200);
+    }
+    .product-icon img { width: 72px; height: 72px; object-fit: contain; }
+    .product-body { flex: 1; }
+    .product-body h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: var(--gray-900); }
+    .product-body .subtitle { font-size: 14px; color: var(--gray-500); margin-bottom: 10px; }
+    .product-body p { font-size: 14px; color: var(--gray-600); margin-bottom: 12px; }
+    .features {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 14px 0;
+    }
+    .features li {
+      list-style: none; padding: 6px 10px; background: var(--gray-50);
+      border-radius: var(--radius); font-size: 13px; color: var(--gray-700);
+    }
+    .features li::before { content: "\2713"; color: var(--success); font-weight: 700; margin-right: 5px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: var(--radius); font-size: 15px;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      transition: background 0.15s; margin: 4px 8px 4px 0;
+    }
+    .dl-btn.primary { background: var(--primary); color: white; }
+    .dl-btn.primary:hover { background: var(--primary-dark); }
+    .dl-btn.green { background: #059669; color: white; }
+    .dl-btn.green:hover { background: #047857; }
+    .dl-btn.gray { background: var(--gray-700); color: white; }
+    .dl-btn.gray:hover { background: var(--gray-900); }
+    .dl-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .dl-note { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      border-radius: var(--radius); margin: 14px 0;
+    }
+    .video-wrapper iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+    }
+    .badge {
+      display: inline-block; padding: 3px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; margin-bottom: 10px;
+    }
+    .badge.green { background: #d1fae5; color: #065f46; }
+    .badge.amber { background: #fef3c7; color: #92400e; }
+    .badge.blue { background: #dbeafe; color: #1e40af; }
+    .tag { font-size: 13px; font-weight: 600; color: var(--gray-600); margin-bottom: 2px; }
+    .step { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%; background: var(--primary);
+      color: white; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .step div { font-size: 14px; }
+    .card.payroll { border-top: 4px solid #283593; }
+    .card.inventory { border-top: 4px solid #059669; }
+    .footer { text-align: center; padding: 24px 20px; font-size: 13px; color: var(--gray-400); }
+    .footer a { color: var(--primary); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .product-layout { flex-direction: column; align-items: center; text-align: center; }
+      .features { grid-template-columns: 1fr; }
+      .dl-btn { width: 100%; justify-content: center; }
+    }
+    .divider {
+      text-align: center; padding: 8px 0 16px; position: relative;
+    }
+    .divider span {
+      display: inline-block; background: var(--gray-200); padding: 4px 20px;
+      border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Saarthi Technologies</h1>
+  <p>Powerful Chrome extensions for Government &amp; Business operations</p>
+  <div class="badge-row">
+    <span>100% Offline</span>
+    <span>Privacy First</span>
+    <span>Free to Use</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== PAYROLL MANAGER ===== -->
+  <div class="card payroll">
+    <div class="product-layout">
+      <div class="product-icon">
+        <img src="icons/icon128.png" alt="Payroll icon">
+      </div>
+      <div class="product-body">
+        <h2>Central Govt Payroll Manager</h2>
+        <div class="subtitle">Version 1.1.0</div>
+        <p>Complete 7th CPC payroll management for Central Government offices. Manage employee records, process salaries, generate Form 16, NPS exports, and pension calculations — all offline.</p>
+        <span class="badge green">Chrome Extension &bull; Free</span>
+        <ul class="features">
+          <li>Employee Records Management</li>
+          <li>7th CPC Pay Matrix</li>
+          <li>Salary Processing &amp; Slips</li>
+          <li>Form 16 Generation</li>
+          <li>NPS Export &amp; Reports</li>
+          <li>Pension Processing (OPS)</li>
+          <li>Allowances &amp; Deductions</li>
+          <li>Arrears Calculation</li>
+          <li>Bank Slips &amp; Reports</li>
+          <li>Backup &amp; Restore</li>
+        </ul>
+        <div style="margin-top:14px;">
+          <div class="tag">Get it from Chrome Web Store</div>
+          <a class="dl-btn primary" href="https://chromewebstore.google.com/detail/central-govt-payroll-mana/xxxxxxxxxx" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg>
+            Add to Chrome &mdash; Free
+          </a>
+          <div class="dl-note">No install needed &bull; Works offline &bull; Auto-updates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== INVENTORY MANAGEMENT ===== -->
+  <div class="card inventory">
+    <div class="product-layout">
+      <div class="product-icon">
+        <img src="https://raw.githubusercontent.com/Ajay209Git/InventoryManagementMedicine/refs/heads/main/logo.png" alt="Inventory icon" onerror="this.parentElement.innerHTML='IM'">
+      </div>
+      <div class="product-body">
+        <h2>Inventory Management Pro</h2>
+        <div class="subtitle">Version 2.0.0</div>
+        <p>Full-featured inventory management system for businesses. Master data, purchases, sales, stock reports, and more — available as a Chrome extension &amp; standalone desktop app.</p>
+        <span class="badge blue">Chrome Extension</span> <span class="badge amber">Desktop App (Windows)</span>
+        <ul class="features">
+          <li>Master Data (Items, Categories)</li>
+          <li>Purchase Management</li>
+          <li>Sales &amp; Invoice</li>
+          <li>Financial Year Tracking</li>
+          <li>Stock Reports</li>
+          <li>Day Book &amp; Expiry Reports</li>
+          <li>Export to PDF / Excel / CSV</li>
+          <li>WhatsApp Invoice Sharing</li>
+          <li>90-day Free Trial</li>
+        </ul>
+
+        <!-- Video -->
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/3LbnviylqM8" allowfullscreen></iframe>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="tag">Chrome Extension (Recommended)</div>
+          <a class="dl-btn green" href="https://chromewebstore.google.com/detail/inventory-management-pro/hcppojjmlgimkmilmdchpgbmeipmeief" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg>
+            Add to Chrome &mdash; Free
+          </a>
+          <div class="dl-note">No download required &bull; Auto-updates</div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="tag">Windows Desktop App</div>
+          <a class="dl-btn gray" href="https://drive.google.com/file/d/1RF3BikR2i9D-zjWI-QwSmvheRPQoOUy6/view" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/></svg>
+            Download Installer (68 MB)
+          </a>
+          <div class="dl-note">Windows 10/11 &bull; Works without Chrome &bull; Runs offline</div>
+        </div>
+
+        <!-- Install Steps -->
+        <div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--gray-200);">
+          <div style="font-size:14px; font-weight:600; margin-bottom:8px;">How to Install (Desktop App)</div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>Download the <strong>.exe</strong> file using the button above.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>Double-click the installer and follow the on-screen instructions.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>Launch the app from the desktop shortcut. Set up your organization and start using!</div>
+          </div>
+          <div style="margin-top:10px; font-size:13px; color:var(--gray-500);">
+            <strong>Note:</strong> Windows SmartScreen may show a warning since the app is unsigned.
+            Click <strong>"More info"</strong> then <strong>"Run anyway"</strong> to proceed.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Why Choose ===== -->
+  <div class="card" style="text-align:center;">
+    <h2 style="font-size:18px; font-weight:700; margin-bottom:16px;">Why Our Extensions?</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:16px; text-align:left;">
+      <div style="padding:12px;">
+        <div style="font-weight:700; color:var(--gray-900);">100% Offline</div>
+        <div style="font-size:13px; color:var(--gray-500);">All data stays on your device. No cloud, no servers, no tracking.</div>
+      </div>
+      <div style="padding:12px;">
+        <div style="font-weight:700; color:var(--gray-900);">Privacy First</div>
+        <div style="font-size:13px; color:var(--gray-500);">Zero data collection. We never see your employee or inventory data.</div>
+      </div>
+      <div style="padding:12px;">
+        <div style="font-weight:700; color:var(--gray-900);">No Internet Needed</div>
+        <div style="font-size:13px; color:var(--gray-500);">Works fully offline once installed. Use it anywhere, anytime.</div>
+      </div>
+      <div style="padding:12px;">
+        <div style="font-weight:700; color:var(--gray-900);">Always Free</div>
+        <div style="font-size:13px; color:var(--gray-500);">Both extensions are completely free — no hidden charges, no subscriptions.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 Saarthi Technologies &bull;
+  <a href="privacy-policy.html">Privacy Policy</a> &bull;
+  <a href="https://github.com/Ajay209Git" target="_blank">GitHub</a>
+</div>
+
+</body>
+</html>

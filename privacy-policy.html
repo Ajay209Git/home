@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Saarthi Technologies</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #4f46e5;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --radius-lg: 12px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      font-family: var(--font);
+      background: #f8fafc;
+      color: var(--gray-800);
+      line-height: 1.7;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 { font-size: 28px; font-weight: 700; }
+    .header p { opacity: 0.8; font-size: 14px; margin-top: 4px; }
+    .container { max-width: 780px; margin: 0 auto; padding: 40px 20px 60px; }
+    .card {
+      background: white; border-radius: var(--radius-lg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 36px;
+      border: 1px solid var(--gray-200);
+    }
+    h2 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; color: var(--gray-900); }
+    h2:first-of-type { margin-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; margin: 20px 0 6px; color: var(--gray-900); }
+    p { font-size: 14px; color: var(--gray-600); margin-bottom: 12px; }
+    ul { margin: 8px 0 16px 20px; }
+    ul li { font-size: 14px; color: var(--gray-600); margin-bottom: 4px; }
+    .last-updated { font-size: 13px; color: var(--gray-400); margin-bottom: 20px; }
+    .ext-list {
+      display: grid; gap: 16px; margin: 16px 0;
+    }
+    .ext-item {
+      background: var(--gray-100); border-radius: 8px; padding: 16px;
+      border-left: 4px solid var(--primary);
+    }
+    .ext-item.inventory { border-left-color: #059669; }
+    .ext-item h4 { font-size: 14px; font-weight: 700; }
+    .ext-item p { font-size: 13px; margin: 4px 0 0; }
+    .footer { text-align: center; padding: 24px 20px; font-size: 13px; color: var(--gray-400); }
+    .footer a { color: var(--primary); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .back-link { display: inline-block; margin-bottom: 16px; color: var(--primary); text-decoration: none; font-size: 14px; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Privacy Policy</h1>
+  <p>Saarthi Technologies — Chrome Extensions</p>
+</div>
+
+<div class="container">
+  <div class="card">
+
+    <p class="last-updated">Last updated: May 2026</p>
+
+    <p>This privacy policy applies to the following Chrome extensions published by Saarthi Technologies:</p>
+    <div class="ext-list">
+      <div class="ext-item">
+        <h4>Central Govt Payroll Manager</h4>
+        <p>7th CPC payroll management for Central Government offices.</p>
+      </div>
+      <div class="ext-item inventory">
+        <h4>Inventory Management Pro</h4>
+        <p>Full-featured inventory management system for businesses.</p>
+      </div>
+    </div>
+
+    <h2>Data Collection</h2>
+    <p><strong>We do not collect, store, transmit, or share any personal data.</strong></p>
+    <p>Both extensions operate entirely offline on your device. All data you enter — employee records, salary information, inventory items, invoices, etc. — is stored locally using the <strong>chrome.storage API</strong> and <strong>SQLite WASM</strong> (bundled with the extension). No data ever leaves your browser.</p>
+
+    <h2>Data We Do NOT Collect</h2>
+    <ul>
+      <li>No personally identifiable information is transmitted</li>
+      <li>No health information</li>
+      <li>No financial or payment information is transmitted</li>
+      <li>No authentication information (passwords, credentials)</li>
+      <li>No location data</li>
+      <li>No web history or browsing activity</li>
+      <li>No personal communications</li>
+      <li>No website content</li>
+    </ul>
+
+    <h2>Permissions Used</h2>
+
+    <h3>Central Govt Payroll Manager</h3>
+    <ul>
+      <li><strong>storage</strong> — Saves payroll data (employees, salary records, settings) locally on your device.</li>
+      <li><strong>unlimitedStorage</strong> — Required because payroll data can exceed the standard storage quota.</li>
+      <li><strong>offscreen</strong> — Generates PDF documents (salary slips, Form 16, pension slips) in the background without interrupting your workflow.</li>
+      <li><strong>host_permissions (https://ifsc.razorpay.com/*)</strong> — Fetches bank IFSC code details to validate bank information on salary/bank slips. Only the IFSC code you enter is sent; no personal data is shared.</li>
+      <li><strong>wasm-unsafe-eval (CSP)</strong> — Required by the bundled SQLite WASM library for offline database operations. No remote code is executed.</li>
+    </ul>
+
+    <h3>Inventory Management Pro</h3>
+    <ul>
+      <li><strong>storage</strong> — Saves inventory data (items, categories, purchases, sales, invoices) locally on your device.</li>
+      <li><strong>unlimitedStorage</strong> — Required for large inventory datasets.</li>
+      <li><strong>offscreen</strong> — Generates PDF invoices and reports in the background.</li>
+    </ul>
+
+    <h2>Data Sharing &amp; Third Parties</h2>
+    <p>We do <strong>not</strong> sell, transfer, or share any user data with third parties. The only external network request made by our extensions is to the <strong>Razorpay IFSC API</strong> (in Payroll Manager) to look up bank branch details — and this only contains the public IFSC code you enter, not any personal information.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Our extensions are not directed at children under the age of 13. We do not knowingly collect any information from children.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. Changes will be posted on this page. Your continued use of the extensions after any changes constitutes acceptance of the updated policy.</p>
+
+    <h2>Contact</h2>
+    <p>If you have any questions about this privacy policy, please reach out via our <a href="https://github.com/Ajay209Git" target="_blank">GitHub profile</a> or through the Chrome Web Store support channel.</p>
+
+  </div>
+</div>
+
+<div class="footer">
+  &copy; 2026 Saarthi Technologies &bull;
+  <a href="index.html">Home</a>
+</div>
+
+</body>
+</html>
